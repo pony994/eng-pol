@@ -1,0 +1,61 @@
+Nowy Slownik angielsko-polski
+Autorzy: T. Piotrowski i Z Saloni
+Wersja w formacie DICT, stardict i mobi
+
+Slownik w wersji TEI pochodzi ze strony: http://freedict.svn.sourceforge.net/viewvc/freedict/trunk/eng-pol/
+Wersja ta zostala wybrana poniewaz jest lepszej jakosci niz druga istniejaca wersja
+
+Zawartosc katalogu dictionary:
+Czesc zasadnicza:
+1. katalog mobi - slownik w formacie mobi
+2. katalog stardict - slownik w formacie stardict + skrypt installStardict.sh = skrypt instalujacy slownik (trzeba go uruchamiac jako superuser)
+3. katalog DICT - slownik w formacie DICT + skrypt installDICT.sh = skrypt instalujacy (trzeba go uruchamiac jako superuser)
+
+Czesc pomocnicza:
+4. katalog TEI - slownik w formacie TEI
+5. katalog scripts (skrypty pomocnicze i inne potrzebne pliki):
+	1. concatenate.sh - laczenie plikow TEI w jeden plik dictionary.xml
+	2. header - naglowek do slownika w formacie c5, jest wykorzystywany przy tworzeniu wersji DICT
+	3. list - lista hasel w slowniku
+	4. parse.py - parsowanie pliku dictionary.xml na plik dictionary.c5
+	5. remove_blanks.sh - usuniecie spacji i tabulatur pomiedzy wezlami w pliku xml (zeby skrypt parse.py nie musial czytac pustych wezlow xml) 
+	6. correct_tabfile.py - skrypt do poprawienia pliku stardict tabfile stworzonego przez dictd2dic z stardict-tools
+	
+6. skrypt tei2DICT.sh - konwersja z formatu TEI do formatu DICT
+7. dictd2dic.sh - skrypt do konwersji z DICT do stardicta (pobrany z pakietu dict-freedict systemu Ubuntu), wersja ta zawiera jednak bledy,
+	sposob ich poprawy opisany jest w sekcji "Format stardict"
+
+
+
+
+
+W przypadku gdy chce ponownie przeprowadzic konwersje nalezy (bedac w katalogu dictionary):
+Format DICT:
+1. Wykonac skrypt ./tei2DICT.sh - w katalogu ./dictionary/DICT pojawi sie wersja DICT
+2. Jako superuser w katalogu ./dictionary/DICT/ wykonac skrypt ./installDICT.sh (oczywiscie musi byc wczesniej zainstalowany dict i dictd)
+3. Sprawdzic czy slownik sie zainstalowal: wywolac komende dict -D
+
+Format stardict:
+1. Musi byc zainstalowany slownik w formacie DICT oraz zainstalowane musza byc pakiety stardict i stardict-tools
+2. Wykonac skrypt ./dictd2dic eng-pol (slownik zostanie zainstalowany w katalogu /usr/share/stardict/dic, 
+	nalezy jednak jeszcze poprawic bledy programu dictd2dic, tzn. usuniete "-" z hasel i zamiana kolejnosci niektorych hasel)
+3. Skopiowac pliki dictd_www.dict.org_eng-pol.dict.dz, dictd_www.dict.org_eng-pol.dict.dz.ifo i dictd_www.dict.org_eng-pol.dict.dz.idx z katalogu /usr/share/stardict/dic do 	katalogu ./dictionary/stardict. Pliki ze starej lokalizacji usunac
+4. W folderze ./dictionary/stardict wykonac komende: dictzip -d dictd_www.dict.org_eng-pol.dict.dz . Powstanie plik dictd_www.dict.org_eng-pol.dict
+5. Uruchomic stardict-editor. W zakladce DeCompile wybrac plik dictd_www.dict.org_eng-pol.dict i kliknac Decompile. Powstanie plik dictd_www.dict.org_eng-pol.txt
+6. Usunac pliki z folderu ./dictionary/stardict: dictd_www.dict.org_eng-pol.dict, dictd_www.dict.org_eng-pol.dict.dz.ifo i dictd_www.dict.org_eng-pol.dict.dz.idx
+7. Bedac w katalogu ./dictionary/scripts wywolac python correct_tabfile.py . Powstanie plik ./dictionary/stardict/eng-pol.txt (ten plik jest wykorzystywany takze przy konwersji do formatu mobi)
+8. Uruchomic stardict-editor. W zakladce Compile wybrac plik ./dictionary/stardict/eng-pol.txt i kliknac Build. W katalogu ./dictionary/stardict powstana pliki 
+	eng-pol.dict.dz, eng-pol.idx i eng-pol.ifo
+9. Edytowac plik ./dictionary/stardict/eng-pol.ifo: edytowac sekcje bookname, dodac sekcje author i description (mozna uzyc sekcji z pliku 
+	./dictionary/stardict/eng-pol.ifo.backup) 
+10. Jako superuser w katalogu ./dictionary/stardict/ wykonac skrypt ./installStardict.sh
+
+Format mobi:
+Konwersja pliku tabfile (utworzonego w kroku Format stardict) na format mobi opisana jest na:
+http://www.klokan.cz/projects/stardict-lingea/
+1. Nalezy pobrac skrypt tab2opf.py i mobigen.exe
+2. tab2opf.py -utf eng-pol.txt (plik eng-pol.txt powstal w punkcie 7 konwersji do formatu stardict)
+3. W powstalym pliku eng-pol.opf nalezy dodac sekcje <dc:Author>, edytowac sekcje <dc:Title> i <DictionaryOutLanguage> (mozna uzyc wartosci z pliku
+	./dictionary/mobi/eng-pol.opf.backup)
+3. wine mobigen.exe eng-pol.opf
+
