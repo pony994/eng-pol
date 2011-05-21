@@ -24,7 +24,8 @@ Czesc pomocnicza:
 	6. correct_tabfile.py - skrypt do poprawienia pliku stardict tabfile stworzonego przez dictd2dic z stardict-tools
 	
 6. skrypt tei2DICT.sh - konwersja z formatu TEI do formatu DICT
-7. dictd2dic.sh - skrypt do konwersji z DICT do stardicta (pobrany z pakietu dict-freedict systemu Ubuntu), wersja ta zawiera jednak bledy,
+7. dictd2dic.sh - skrypt do konwersji z DICT do stardicta (pobrany z pakietu dict-freedict systemu Ubuntu --- zgodnie z GPLv3 jest to więc
+	modyfikacja pakietu dict-freedict, data modyfikacji: 21 maja 2011), wersja ta zawiera jednak bledy,
 	sposob ich poprawy opisany jest w sekcji "Format stardict"
 
 
