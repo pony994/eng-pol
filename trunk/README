@@ -2,7 +2,8 @@ Nowy Slownik angielsko-polski
 Autorzy: T. Piotrowski i Z Saloni
 Wersja w formacie DICT, stardict i mobi
 
-Slownik w wersji TEI pochodzi ze strony: http://freedict.svn.sourceforge.net/viewvc/freedict/trunk/eng-pol/
+Slownik w wersji TEI z którego dokonano konwersji pochodzi ze strony: http://freedict.svn.sourceforge.net/viewvc/freedict/trunk/eng-pol/
+(directory revision 1130)
 Wersja ta zostala wybrana poniewaz jest lepszej jakosci niz druga istniejaca wersja
 
 Zawartosc katalogu dictionary:
@@ -12,7 +13,8 @@ Czesc zasadnicza:
 3. katalog DICT - slownik w formacie DICT + skrypt installDICT.sh = skrypt instalujacy (trzeba go uruchamiac jako superuser)
 
 Czesc pomocnicza:
-4. katalog TEI - slownik w formacie TEI
+4. katalog TEI - przed ponownym dokonaniem konwersji należy w tym katalogu umieścić 
+	zawartość katalogu "letters" z http://freedict.svn.sourceforge.net/viewvc/freedict/trunk/eng-pol/
 5. katalog scripts (skrypty pomocnicze i inne potrzebne pliki):
 	1. concatenate.sh - laczenie plikow TEI w jeden plik dictionary.xml
 	2. header - naglowek do slownika w formacie c5, jest wykorzystywany przy tworzeniu wersji DICT
@@ -31,9 +33,10 @@ Czesc pomocnicza:
 
 W przypadku gdy chce ponownie przeprowadzic konwersje nalezy (bedac w katalogu dictionary):
 Format DICT:
-1. Wykonac skrypt ./tei2DICT.sh - w katalogu ./dictionary/DICT pojawi sie wersja DICT
-2. Jako superuser w katalogu ./dictionary/DICT/ wykonac skrypt ./installDICT.sh (oczywiscie musi byc wczesniej zainstalowany dict i dictd)
-3. Sprawdzic czy slownik sie zainstalowal: wywolac komende dict -D
+1. Pobrać katalog letters z http://freedict.svn.sourceforge.net/viewvc/freedict/trunk/eng-pol/ (directory revision 1130) i skopiować zawartość do katalogu ./dictionary/TEI
+2. Wykonac skrypt ./tei2DICT.sh - w katalogu ./dictionary/DICT pojawi sie wersja DICT
+3. Jako superuser w katalogu ./dictionary/DICT/ wykonac skrypt ./installDICT.sh (oczywiscie musi byc wczesniej zainstalowany dict i dictd)
+4. Sprawdzic czy slownik sie zainstalowal: wywolac komende dict -D
 
 Format stardict:
 1. Musi byc zainstalowany slownik w formacie DICT oraz zainstalowane musza byc pakiety stardict i stardict-tools
