@@ -5,7 +5,7 @@ Wersja w formacie DICT, stardict i mobi
 Slownik w wersji TEI z którego dokonano konwersji pochodzi ze strony: http://freedict.svn.sourceforge.net/viewvc/freedict/trunk/eng-pol/
 (directory revision 1130)
 Wersja ta zostala wybrana poniewaz jest lepszej jakosci niz druga istniejaca wersja
-
+Wersja zrodlowa slownika (w tym wersja TEI niezbedna do ponownej konwersji) znajduje sie takze w http://sourceforge.net/projects/freedict/files/English%20-%20Polish/0.1/
 Zawartosc katalogu dictionary:
 Czesc zasadnicza:
 1. katalog mobi - slownik w formacie mobi
