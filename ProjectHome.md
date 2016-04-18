@@ -1,0 +1,1 @@
+Nowy słownik angielsko-polski. Wersja DICT, stardict i mobi
